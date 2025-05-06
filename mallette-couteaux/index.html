@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<link rel="icon" href="minilogo.png" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Dipo Store</title>
+<meta name="description" content="اطلب الآن من Dipo Store واحصل على أفضل العروض مع توصيل لجميع ولايات الجزائر. دفع عند الاستلام وضمان الجودة.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '23990098767264674'); 
+  fbq('track', 'PageView');
+</script>
+<noscript>
+    <img height="1" width="1" 
+    src="https://www.facebook.com/tr?id=23990098767264674_ID&ev=PageView&noscript=1"/>
+  </noscript>
+</head>
+<body>
+<!-- البار العلوي المعدل -->
+<div class="top-bar">
+  <img src="logo.png" alt="شعار المتجر" class="top-bar-logo">
+  <div class="top-bar-content">
+    <p>التوصيل متوفر 58 ولاية</p>
+<p>والدفع عند الاستلام، مرحبا بكم</p>
+
+  </div>
+  <div class="theme-switcher">
+    <button class="theme-toggle-ball" id="themeToggleBall">
+      <i class="fas fa-sun theme-icon sun-icon"></i>
+      <i class="fas fa-moon theme-icon moon-icon"></i>
+    </button>
+  </div>
+  
+</div>
+
+<div id="loader">
+  <div class="spinner">
+    <img src="minilogo.png" alt="شعار" class="logo" />
+  </div>
+</div>
+
+<div class="container">
+  <h2>🕌🔪 Mallette Pro Couteaux</h2>
+
+  <div class="delivery-estimate">التوصيل خلال يوم واحد حتى 3 ايام لا تنسى ترك الهاتف مفتوحا طيلة الوقت</div>
+  <div class="image-gallery">
+    <img src="1.jpg" class="gallery-image active" alt="Image 1">
+    <img src="2.jpg" class="gallery-image" alt="Image 2">
+    <img src="3.jpg" class="gallery-image" alt="Image 3">
+    <img src="4.jpg" class="gallery-image" alt="Image 4">
+    <img src="5.jpg" class="gallery-image" alt="Image 5">
+    <button class="gallery-nav gallery-prev"><i class="fas fa-chevron-right"></i></button>
+    <button class="gallery-nav gallery-next"><i class="fas fa-chevron-left"></i></button>
+    <div class="gallery-indicators">
+      <div class="gallery-indicator active" data-index="0"></div>
+      <div class="gallery-indicator" data-index="1"></div>
+      <div class="gallery-indicator" data-index="2"></div>
+      <div class="gallery-indicator" data-index="3"></div>
+      <div class="gallery-indicator" data-index="4"></div>
+    </div>
+  </div>
+  
+  <span style="font-weight: bold; color: var(--primary-color); font-size: 22px;">9800 دج</span> 
+  <span style="text-decoration: line-through; color: #6EC1E4; font-size: 18px; margin-left: 10px;">11500 دج</span>
+  <span id="countdown" style="color: #80c1e6; font-size: 20px; font-weight: bold; float: left;"></span>
+  
+  <script>
+    let duration = 5*3600 + 28 * 60 + 35; 
+
+    function startCountdown() {
+      const countdownEl = document.getElementById("countdown");
+
+      const interval = setInterval(() => {
+        const hours = String(Math.floor(duration / 3600)).padStart(2, '0');
+        const minutes = String(Math.floor((duration % 3600) / 60)).padStart(2, '0');
+        const seconds = String(duration % 60).padStart(2, '0');
+
+        countdownEl.textContent = `${hours}:${minutes}:${seconds}`;
+        duration--;
+
+        if (duration < 0) {
+          clearInterval(interval);
+          countdownEl.textContent = "العرض انتهى";
+        }
+      }, 1000);
+    } 
+    window.onload = startCountdown;
+  </script>
+  
+  <h3>حقيبة واحدة تجمع كل الأدوات اللازمة ليوم الأضحية بكل أناقة وكفاءة!</h3>
+  
+  <form id="orderForm">
+    <input type="text" id="name" placeholder="أدخل الاسم الكامل" required>
+    <input type="tel" id="phone" placeholder="أدخل رقم الهاتف" required pattern="[0]{1}[5-7]{1}[0-9]{8}" style="text-align: right;">
+    
+    <select id="wilaya" required>
+      <option value="">اختر الولاية</option>
+      <option value="01">1- أدرار (Adrar)</option>
+      <option value="02">2- الشلف (Chlef)</option>
+      <option value="03">3- الأغواط (Laghouat)</option>
+      <option value="04">4- أم البواقي (Oum El Bouaghi)</option>
+      <option value="05">5- باتنة (Batna)</option>
+      <option value="06">6- بجاية (Béjaïa)</option>
+      <option value="07">7- بسكرة (Biskra)</option>
+      <option value="08">8- بشار (Béchar)</option>
+      <option value="09">9- البليدة (Blida)</option>
+      <option value="10">10- البويرة (Bouira)</option>
+      <option value="11">11- تمنراست (Tamanrasset)</option>
+      <option value="12">12- تبسة (Tébessa)</option>
+      <option value="13">13- تلمسان (Tlemcen)</option>
+      <option value="14">14- تيارت (Tiaret)</option>
+      <option value="15">15- تيزي وزو (Tizi Ouzou)</option>
+      <option value="16">16- الجزائر (Algiers)</option>
+      <option value="17">17- الجلفة (Djelfa)</option>
+      <option value="18">18- جيجل (Jijel)</option>
+      <option value="19">19- سطيف (Sétif)</option>
+      <option value="20">20- سعيدة (Saïda)</option>
+      <option value="21">21- سكيكدة (Skikda)</option>
+      <option value="22">22- سيدي بلعباس (Sidi Bel Abbès)</option>
+      <option value="23">23- عنابة (Annaba)</option>
+      <option value="24">24- قالمة (Guelma)</option>
+      <option value="25">25- قسنطينة (Constantine)</option>
+      <option value="26">26- المدية (Médéa)</option>
+      <option value="27">27- مستغانم (Mostaganem)</option>
+      <option value="28">28- المسيلة (M'Sila)</option>
+      <option value="29">29- معسكر (Mascara)</option>
+      <option value="30">30- ورقلة (Ouargla)</option>
+      <option value="31">31- وهران (Oran)</option>
+      <option value="32">32- البيض (El Bayadh)</option>
+      <option value="33">33- إليزي (Illizi)</option>
+      <option value="34">34- برج بوعريريج (Bordj Bou Arreridj)</option>
+      <option value="35">35- بومرداس (Boumerdès)</option>
+      <option value="36">36- الطارف (El Tarf)</option>
+      <option value="37">37- تندوف (Tindouf)</option>
+      <option value="38">38- تيسمسيلت (Tissemsilt)</option>
+      <option value="39">39- الوادي (El Oued)</option>
+      <option value="40">40- خنشلة (Khenchela)</option>
+      <option value="41">41- سوق أهراس (Souk Ahras)</option>
+      <option value="42">42- تيبازة (Tipaza)</option>
+      <option value="43">43- ميلة (Mila)</option>
+      <option value="44">44- عين الدفلى (Aïn Defla)</option>
+      <option value="45">45- النعامة (Naama)</option>
+      <option value="46">46- عين تموشنت (Aïn Témouchent)</option>
+      <option value="47">47- غرداية (Ghardaïa)</option>
+      <option value="48">48- غليزان (Relizane)</option>
+      <option value="49">49- تميمون (Timimoun)</option>
+      <option value="50">50- برج باجي مختار (Bordj Baji Mokhtar)</option>
+      <option value="51">51- أولاد جلال (Ouled Djellal)</option>
+      <option value="52">52- بني عباس (Beni Abbes)</option>
+      <option value="53">53- عين صالح (In Salah)</option>
+      <option value="54">54- عين قزام (In Guezzam)</option>
+      <option value="55">55- تقرت (Touggourt)</option>
+      <option value="56">56- جانت (Djanet)</option>
+      <option value="57">57- المغير (El M'Ghair)</option>
+      <option value="58">58- المنيعة (El Meniaa)</option>
+    </select>
+    
+    <div class="radio-group">
+      <input type="radio" id="deliveryHome" name="delivery" value="للمنزل" checked>
+      <label for="deliveryHome">للمنزل</label>
+      <input type="radio" id="deliveryOffice" name="delivery" value="للمكتب">
+      <label for="deliveryOffice">للمكتب</label>
+    </div>
+    
+    <input type="text" id="address" placeholder="أدخل العنوان الكامل (البلدية، الحي)" required>
+    
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        دفع عند الاستلام
+      </div>
+      <div class="trust-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        ضمان الجودة
+      </div>
+      <div class="trust-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        دعم 24/7
+      </div>
+    </div>
+    
+    <div class="social-icons">
+      <a href="https://www.facebook.com/profile.php?id=61574941742592" target="_blank" class="social-icon facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://www.tiktok.com/@dipostore.dz" target="_blank" class="social-icon tiktok">
+        <i class="fab fa-tiktok"></i>
+      </a>
+      <a href="https://www.instagram.com/dipostore.dz/" target="_blank" class="social-icon instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://t.me/dipostorealgeria" target="_blank" class="social-icon telegram">
+        <i class="fab fa-telegram-plane"></i>
+      </a>
+    </div>
+    
+    <div class="order-summary-section">
+      <div class="price-box">
+        <div>
+          <span>سعر المنتج:</span>
+          <span id="productPrice">9800</span>
+          <span>دج</span>
+        </div>
+        <div>
+          <span>سعر التوصيل:</span>
+          <span id="deliveryPrice">إختر الولاية</span>
+          <span>دج</span>
+        </div>
+        <div class="total-price">
+          <span>المجموع:</span>
+          <span id="totalPrice">--</span>
+          <span>دج</span>
+        </div>
+      </div>
+      
+      <div class="action-container">
+        <div class="quantity-control">
+          <button type="button" onclick="changeQuantity(-1)">-</button>
+          <input type="text" id="quantity" value="1" readonly>
+          <button type="button" onclick="changeQuantity(1)">+</button>
+        </div>
+        <button type="submit" class="submit-btn">إرسال الطلب</button>
+      </div>
+    </div>
+    <div class="form-image-container">
+      <img src="description.jpg" alt="description" class="form-image">
+    </div>
+  </form>
+</div>
+<div class="form-image-container">
+  <img src="allright.png" alt="description" class="form-image">
+<script>
+// تعديل سكريبت تغيير الوضع ليتناسب مع الزر الجديد
+const themeToggleBall = document.getElementById('themeToggleBall');
+const body = document.body;
+const sunIcon = document.querySelector('.sun-icon');
+const moonIcon = document.querySelector('.moon-icon');
+
+if (localStorage.getItem('theme') === 'dark') {
+  body.classList.add('dark-mode');
+  sunIcon.style.opacity = '0';
+  sunIcon.style.transform = 'translateY(-20px)';
+  moonIcon.style.opacity = '1';
+  moonIcon.style.transform = 'translateY(0)';
+}
+
+themeToggleBall.addEventListener('click', function() {
+  body.classList.toggle('dark-mode');
+  
+  if (body.classList.contains('dark-mode')) {
+    localStorage.setItem('theme', 'dark');
+    sunIcon.style.opacity = '0';
+    sunIcon.style.transform = 'translateY(-20px)';
+    moonIcon.style.opacity = '1';
+    moonIcon.style.transform = 'translateY(0)';
+  } else {
+    localStorage.setItem('theme', 'light');
+    sunIcon.style.opacity = '1';
+    sunIcon.style.transform = 'translateY(0)';
+    moonIcon.style.opacity = '0';
+    moonIcon.style.transform = 'translateY(20px)';
+  }
+});
+
+const prices = {
+  '01': {'للمكتب': 600, 'للمنزل': 1000},
+  '02': {'للمكتب': 350, 'للمنزل': 600},
+  '03': {'للمكتب': 500, 'للمنزل': 750},
+  '04': {'للمكتب': 400, 'للمنزل': 700},
+  '05': {'للمكتب': 350, 'للمنزل': 650},
+  '06': {'للمكتب': 300, 'للمنزل': 550},
+  '07': {'للمكتب': 600, 'للمنزل': 800},
+  '08': {'للمكتب': 700, 'للمنزل': 1000},
+  '09': {'للمكتب': 0, 'للمنزل': 250},
+  '10': {'للمكتب': 400, 'للمنزل': 600},
+  '11': {'للمكتب': 600, 'للمنزل': 1200},
+  '12': {'للمكتب': 450, 'للمنزل': 700},
+  '13': {'للمكتب': 400, 'للمنزل': 700},
+  '14': {'للمكتب': 400, 'للمنزل': 700},
+  '15': {'للمكتب': 350, 'للمنزل': 550},
+  '16': {'للمكتب': 100, 'للمنزل': 250},
+  '17': {'للمكتب': 500, 'للمنزل': 700},
+  '18': {'للمكتب': 400, 'للمنزل': 600},
+  '19': {'للمكتب': 350, 'للمنزل': 550},
+  '20': {'للمكتب': 450, 'للمنزل': 750},
+  '21': {'للمكتب': 400, 'للمنزل': 650},
+  '22': {'للمكتب': 400, 'للمنزل': 650},
+  '23': {'للمكتب': 350, 'للمنزل': 550},
+  '24': {'للمكتب': 400, 'للمنزل': 700},
+  '25': {'للمكتب': 350, 'للمنزل': 550},
+  '26': {'للمكتب': 400, 'للمنزل': 600},
+  '27': {'للمكتب': 400, 'للمنزل': 600},
+  '28': {'للمكتب': 400, 'للمنزل': 650},
+  '29': {'للمكتب': 400, 'للمنزل': 650},
+  '30': {'للمكتب': 500, 'للمنزل': 800},
+  '31': {'للمكتب': 300, 'للمنزل': 500},
+  '32': {'للمكتب': 550, 'للمنزل': 850},
+  '33': {'للمكتب': 900, 'للمنزل': 1300},
+  '34': {'للمكتب': 400, 'للمنزل': 600},
+  '35': {'للمكتب': 350, 'للمنزل': 500},
+  '36': {'للمكتب': 700, 'للمنزل': 700},
+  '37': {'للمكتب': 900, 'للمنزل': 1300},
+  '38': {'للمكتب': 400, 'للمنزل': 700},
+  '39': {'للمكتب': 500, 'للمنزل': 800},
+  '40': {'للمكتب': 450, 'للمنزل': 700},
+  '41': {'للمكتب': 450, 'للمنزل': 800},
+  '42': {'للمكتب': 350, 'للمنزل': 500},
+  '43': {'للمكتب': 400, 'للمنزل': 650},
+  '44': {'للمكتب': 400, 'للمنزل': 600},
+  '45': {'للمكتب': 600, 'للمنزل': 900},
+  '46': {'للمكتب': 450, 'للمنزل': 600},
+  '47': {'للمكتب': 500, 'للمنزل': 800},
+  '48': {'للمكتب': 450, 'للمنزل': 600},
+  '49': {'للمكتب': 1200, 'للمنزل': 1200},
+  '50': {'للمكتب': 1200, 'للمنزل': 1400},
+  '51': {'للمكتب': 800, 'للمنزل': 800},
+  '52': {'للمكتب': 1000, 'للمنزل': 1000},
+  '53': {'للمكتب': 1200, 'للمنزل': 1400},
+  '54': {'للمكتب': 1350, 'للمنزل': 1550},
+  '55': {'للمكتب': 850, 'للمنزل': 850},
+  '56': {'للمكتب': 900, 'للمنزل': 900},
+  '57': {'للمكتب': 900, 'للمنزل': 900},
+  '58': {'للمكتب': 600, 'للمنزل': 900},
+};
+
+const productPrice = 9800;
+const freeShippingThreshold = 50000;
+const wilayaSelect = document.getElementById('wilaya');
+const deliveryRadios = document.getElementsByName('delivery');
+const deliveryPriceEl = document.getElementById('deliveryPrice');
+const totalPriceEl = document.getElementById('totalPrice');
+const quantityInput = document.getElementById('quantity');
+const phoneInput = document.getElementById('phone');
+
+phoneInput.addEventListener('input', function() {
+  if (!this.checkValidity()) {
+    this.classList.add('highlight');
+    setTimeout(() => this.classList.remove('highlight'), 1500);
+  }
+});
+
+function updatePrices() {
+  const wilaya = wilayaSelect.value;
+  const delivery = [...deliveryRadios].find(r => r.checked)?.value;
+  const quantity = parseInt(quantityInput.value);
+  const subtotal = productPrice * quantity;
+  
+  if (wilaya && delivery && prices[wilaya]) {
+    let deliveryPrice = prices[wilaya][delivery];
+    let total = subtotal + deliveryPrice;
+    
+    if (subtotal >= freeShippingThreshold) {
+      deliveryPrice = 0;
+      total = subtotal;
+      deliveryPriceEl.innerHTML = '<span style="text-decoration:line-through">' + prices[wilaya][delivery] + '</span> 0';
+    } else {
+      deliveryPriceEl.textContent = deliveryPrice;
+    }
+    
+    totalPriceEl.textContent = total;
+  } else {
+    deliveryPriceEl.textContent = 'اختر الولاية';
+    totalPriceEl.textContent = '--';
+  }
+}
+
+function changeQuantity(change) {
+  let current = parseInt(quantityInput.value);
+  let newVal = current + change;
+  
+  if (newVal >= 1 && newVal <= 10) {
+    quantityInput.value = newVal;
+    quantityInput.classList.add('highlight');
+    setTimeout(() => quantityInput.classList.remove('highlight'), 500);
+    updatePrices();
+  }
+}
+
+wilayaSelect.addEventListener('change', function() {
+  this.classList.add('highlight');
+  setTimeout(() => this.classList.remove('highlight'), 500);
+  updatePrices();
+});
+
+deliveryRadios.forEach(r => r.addEventListener('change', updatePrices));
+
+document.getElementById('orderForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  // هذا الجزء يتحقق من صحة رقم الهاتف
+  if (!phoneInput.checkValidity()) {
+    phoneInput.focus();
+    phoneInput.classList.add('highlight');
+    setTimeout(() => phoneInput.classList.remove('highlight'), 1500);
+    return;
+  }
+  
+  const name = document.getElementById('name').value;
+  const phone = document.getElementById('phone').value;
+  const wilaya = wilayaSelect.options[wilayaSelect.selectedIndex].text;
+  const address = document.getElementById('address').value;
+  const delivery = document.querySelector('input[name="delivery"]:checked').value;
+  const deliveryPrice = deliveryPriceEl.textContent;
+  const totalPrice = totalPriceEl.textContent;
+  const quantity = quantityInput.value;
+  // هذا هو رابط السكريبت الخاص بك
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbybgOcdFAWbFQxfbMwv5XAMLmh9y--M3WHoiAqWnj0zeAh8H-r895TCq8-Yq7UAv7QprQ/exec';
+  
+  // هنا نجهز البيانات للإرسال
+  const formData = new FormData();
+  const productName ="Led Galaxy + Baff Bluetooth";
+  formData.append('productName', productName);
+  formData.append('name', name);
+  formData.append('phone', phone);
+  formData.append('wilaya', wilaya);
+  formData.append('address', address);
+  formData.append('delivery', delivery);
+  formData.append('deliveryPrice', deliveryPrice);
+  formData.append('totalPrice', totalPrice);
+  formData.append('quantity', quantity);
+  
+  fetch(scriptURL, { method: 'POST', body: formData })
+  .then(response => {
+    window.location.href = 'thankyou.html';
+  })
+  .catch(error => {
+    console.error('حدث خطأ أثناء إرسال الطلب:', error);
+  });
+});
+
+updatePrices();
+
+document.addEventListener('DOMContentLoaded', function() {
+  const images = document.querySelectorAll('.gallery-image');
+  const indicators = document.querySelectorAll('.gallery-indicator');
+  const prevBtn = document.querySelector('.gallery-prev');
+  const nextBtn = document.querySelector('.gallery-next');
+  let currentIndex = 0;
+  let interval;
+  
+  function showImage(index) {
+    images.forEach(img => img.classList.remove('active'));
+    indicators.forEach(ind => ind.classList.remove('active'));
+    images[index].classList.add('active');
+    indicators[index].classList.add('active');
+    currentIndex = index;
+  }
+  
+  function nextImage() {
+    let newIndex = (currentIndex + 1) % images.length;
+    showImage(newIndex);
+  }
+  
+  function prevImage() {
+    let newIndex = (currentIndex - 1 + images.length) % images.length;
+    showImage(newIndex);
+  }
+  
+  function startSlider() {
+    interval = setInterval(nextImage, 3000);
+  }
+  
+  function stopSlider() {
+    clearInterval(interval);
+  }
+  
+  nextBtn.addEventListener('click', function() {
+    nextImage();
+    stopSlider();
+    startSlider();
+  });
+  
+  prevBtn.addEventListener('click', function() {
+    prevImage();
+    stopSlider();
+    startSlider();
+  });
+  
+  indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', function() {
+      showImage(index);
+      stopSlider();
+      startSlider();
+    });
+  });
+  
+  startSlider();
+  
+  document.querySelector('.image-gallery').addEventListener('mouseenter', stopSlider);
+  document.querySelector('.image-gallery').addEventListener('mouseleave', startSlider);
+});
+
+</script>
+<a class="whatsapp-button" href="https://wa.me/213797319624" target="_blank" title="تواصل عبر واتساب">
+  <img src="whatsapp.png" alt="WhatsApp"/>
+</a>
+<script>
+  window.addEventListener("load", function () {
+    const loader = document.getElementById("loader");
+    loader.style.display = "none";
+  });
+</script>
+
+</body>
+</html>
