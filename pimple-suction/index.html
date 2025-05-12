@@ -518,37 +518,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const loader = document.getElementById("loader");
     loader.style.display = "none";
   });
-  window.addEventListener("load", function () {
-    const loader = document.getElementById("loader");
-    loader.style.display = "none";
-  });
+
   document.addEventListener("DOMContentLoaded", function () {
     const orderNowBtn = document.getElementById("orderNowBtn");
     const nameInput = document.getElementById("name");
     const topBarHeight = document.querySelector('.top-bar').offsetHeight;
 
     orderNowBtn.addEventListener("click", function () {
-      const topOffset = nameInput.getBoundingClientRect().top + window.scrollY - topBarHeight - 20;
-
-      window.scrollTo({
-        top: topOffset,
-        behavior: "smooth"
-      });
-
-      orderNowBtn.style.display = "none";
-    });
-  });
-  window.addEventListener("load", function () {
-    const loader = document.getElementById("loader");
-    loader.style.display = "none";
-  });
-  document.addEventListener("DOMContentLoaded", function () {
-    const orderNowBtn = document.getElementById("orderNowBtn");
-    const nameInput = document.getElementById("name");
-    const topBarHeight = document.querySelector('.top-bar').offsetHeight;
-
-    orderNowBtn.addEventListener("click", function () {
-      const topOffset = nameInput.getBoundingClientRect().top + window.scrollY - topBarHeight - 20;
+      const topOffset = nameInput.getBoundingClientRect().top + window.scrollY - topBarHeight - 0;
 
       window.scrollTo({
         top: topOffset,
