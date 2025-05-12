@@ -525,18 +525,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const nameInput = document.getElementById("name");
     const topBarHeight = document.querySelector('.top-bar').offsetHeight;
 
-    orderNowBtn.addEventListener("click", function () {
-      const topOffset = nameInput.getBoundingClientRect().top + window.scrollY - topBarHeight - 0;
+    if (orderNowBtn) {
+      // عند الضغط على الزر "اطلب الآن"
+      orderNowBtn.addEventListener("click", function () {
+        const topOffset = nameInput.getBoundingClientRect().top + window.scrollY - topBarHeight - 80;
 
-      window.scrollTo({
-        top: topOffset,
-        behavior: "smooth"
+        window.scrollTo({
+          top: topOffset,
+          behavior: "smooth"
+        });
+
+        orderNowBtn.style.display = "none";
       });
 
-      orderNowBtn.style.display = "none";
-    });
+      // إخفاء الزر عند التمرير أو التحريك
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 50) {
+          orderNowBtn.style.display = "none";
+        }
+      });
+    }
   });
 </script>
-
 </body>
 </html>
