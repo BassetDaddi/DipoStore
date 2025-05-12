@@ -573,3 +573,41 @@ button.submit-btn {
     font-size:15px;
   }
 }
+/* زر اطلب الآن */
+#orderNowBtn {
+  position: fixed;
+  bottom: 10px;
+  right: 7px; 
+  width: 320px; 
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: 14px 28px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  z-index: 999;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(74, 107, 255, 0.6);
+  animation: pulseRadiant 2s infinite;
+}
+
+
+
+/* تأثير النبض */
+@keyframes pulseRadiant {
+  0% {
+    box-shadow: 0 0 0 0 rgba(74, 107, 255, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(74, 107, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(74, 107, 255, 0);
+  }
+}
+
+/* نعيد استخدامه لزر الإرسال */
+button.submit-btn {
+  animation: pulseRadiant 2s infinite;
+}
