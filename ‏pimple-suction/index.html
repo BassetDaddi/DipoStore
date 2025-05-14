@@ -81,7 +81,7 @@
         <option value="">اختر الولاية التوصيل للمنزل</option>
       </select>
 
-      <select id="commune" class="p-2 border rounded" required disabled>
+      <select id="communeSelect" class="p-2 border rounded" required disabled>
         <option value="">اختر البلدية</option>
       </select>
     </div>
@@ -259,7 +259,7 @@ const prices = {
 const productPrice = 2400;
 const freeShippingThreshold = 50000;
 const wilayaSelect = document.getElementById('wilayaSelect');
-const commune = document.getElementById('commune');
+const communeSelect = document.getElementById('communeSelect');
 const deliveryPriceEl = document.getElementById('deliveryPrice');
 const totalPriceEl = document.getElementById('totalPrice');
 const quantityInput = document.getElementById('quantity');
@@ -319,8 +319,8 @@ function populateWilayas(data) {
 function setupWilayaChangeListener(data) {
   wilayaSelect.addEventListener('change', function() {
     const selectedCode = this.value;
-    commune.innerHTML = '<option value="">اختر البلدية</option>';
-    commune.disabled = !selectedCode;
+    communeSelect.innerHTML = '<option value="">اختر البلدية</option>';
+    communeSelect.disabled = !selectedCode;
 
     if (!selectedCode) {
       updatePrices();
@@ -334,14 +334,14 @@ function setupWilayaChangeListener(data) {
         const option = document.createElement('option');
         option.value = item.commune_name;
         option.textContent = item.commune_name;
-        commune.appendChild(option);
+        communeSelect.appendChild(option);
       });
     }
     
     updatePrices();
   });
 
-  commune.addEventListener('change', updatePrices);
+  communeSelect.addEventListener('change', updatePrices);
 }
 
 // إعداد مستمعات الأحداث
@@ -398,7 +398,7 @@ function submitOrder(e) {
   const name = document.getElementById('name').value;
   const phone = document.getElementById('phone').value;
   const wilaya = wilayaSelect.options[wilayaSelect.selectedIndex].text;
-  const commune = commune.options[commune.selectedIndex].text;
+  const commune = communeSelect.options[communeSelect.selectedIndex].text;
   const address = document.getElementById('address').value;
   const deliveryPrice = deliveryPriceEl.textContent;
   const totalPrice = totalPriceEl.textContent;
