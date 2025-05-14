@@ -387,33 +387,31 @@ function changeQuantity(change) {
   }
 }
 
-// إرسال الطلب
 function submitOrder(e) {
   e.preventDefault();
   
-  // تعطيل زر الإرسال وإظهار مؤشر التحميل
   submitBtn.disabled = true;
   submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
   
   const name = document.getElementById('name').value;
   const phone = document.getElementById('phone').value;
   const wilaya = wilayaSelect.options[wilayaSelect.selectedIndex].text;
-  const commune = communeSelect.options[communeSelect.selectedIndex].text;
+  const commune = communeSelect.value; // تغيير من .text إلى .value
   const address = document.getElementById('address').value;
   const deliveryPrice = deliveryPriceEl.textContent;
   const totalPrice = totalPriceEl.textContent;
   const quantity = quantityInput.value;
   
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbzJkuhILROeZRiLpo-vBuRbhDko1CbgdaRE8uabs4yEvtwzkrDLg9Jhm8BOT6N2o8WPTg/exec';
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbz-lFJDNcRdiG83Clxz8khntVXybN1HNwvI_EHf4IqWtbC6Z1aDAfE2HcgOutyWbx48/exec';
   
   const formData = new FormData();
-  const productName = "جهاز شفط الرؤوس السوداء وتنظيف البشرة";
+  const productName = document.querySelector('h2').textContent; // الحصول على اسم المنتج من العنوان h2
   
-  formData.append('productName', productName);
+  formData.append('productName', productName.trim()); // إضافة trim() لإزالة المسافات الزائدة
   formData.append('name', name);
   formData.append('phone', phone);
   formData.append('wilaya', wilaya);
-  formData.append('commune', commune);
+  formData.append('commune', commune); // إرسال قيمة البلدية بدلاً من النص
   formData.append('address', address);
   formData.append('deliveryPrice', deliveryPrice);
   formData.append('totalPrice', totalPrice);
