@@ -352,27 +352,102 @@ const totalPriceEl = document.getElementById('totalPrice');
 const quantityInput = document.getElementById('quantity');
 const phoneInput = document.getElementById('phone');
 
-phoneInput.addEventListener('input', function() {
-  if (!this.checkValidity()) {
-    this.classList.add('highlight');
-    setTimeout(() => this.classList.remove('highlight'), 1500);
-  }
+// تحميل بيانات الولايات والبلديات
+document.addEventListener('DOMContentLoaded', function() {
+  loadWilayasAndCommunes();
+  setupEventListeners();
+  initImageGallery();
 });
 
+// تحميل بيانات الولايات والبلديات من ملف JSON
+function loadWilayasAndCommunes() {
+  fetch('communes.json')
+    .then(response => {
+      if (!response.ok) throw new Error('Network response was not ok');
+      return response.json();
+    })
+    .then(data => {
+      populateWilayas(data);
+      setupWilayaChangeListener(data);
+    })
+    .catch(error => {
+      console.error('Error loading the data:', error);
+      wilayaSelect.innerHTML = '<option value="">خطأ في تحميل البيانات</option>';
+    });
+}
+
+// تعبئة قائمة الولايات
+function populateWilayas(data) {
+  wilayaSelect.innerHTML = '<option value="">اختر الولاية التوصيل للمنزل</option>';
+  
+  const wilayasMap = new Map();
+  data.forEach(item => {
+    if (!wilayasMap.has(item.wilaya_code)) {
+      wilayasMap.set(item.wilaya_code, {
+        code: item.wilaya_code,
+        name: item.wilaya_name
+      });
+    }
+  });
+
+  const sortedWilayas = Array.from(wilayasMap.values()).sort((a, b) => a.code.localeCompare(b.code));
+
+  sortedWilayas.forEach(wilaya => {
+    const option = document.createElement('option');
+    option.value = wilaya.code;
+    option.textContent = `${wilaya.code} - ${wilaya.name}`;
+    wilayaSelect.appendChild(option);
+  });
+}
+
+// إعداد مستمع لتغيير الولاية
+function setupWilayaChangeListener(data) {
+  wilayaSelect.addEventListener('change', function() {
+    const selectedCode = this.value;
+    communeSelect.innerHTML = '<option value="">اختر البلدية</option>';
+    communeSelect.disabled = !selectedCode;
+
+    if (!selectedCode) {
+      updatePrices();
+      return;
+    }
+
+    const communes = data.filter(item => item.wilaya_code === selectedCode);
+    
+    if (communes.length > 0) {
+      communes.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.commune_name;
+        option.textContent = item.commune_name;
+        communeSelect.appendChild(option);
+      });
+    }
+    
+    updatePrices();
+  });
+
+  communeSelect.addEventListener('change', updatePrices);
+}
+
+// إعداد مستمعات الأحداث
+function setupEventListeners() {
+  orderForm.addEventListener('submit', submitOrder);
+}
+
+// تحديث الأسعار بناءً على الاختيارات
 function updatePrices() {
   const wilaya = wilayaSelect.value;
-  const delivery = [...deliveryRadios].find(r => r.checked)?.value;
   const quantity = parseInt(quantityInput.value);
   const subtotal = productPrice * quantity;
   
-  if (wilaya && delivery && prices[wilaya]) {
-    let deliveryPrice = prices[wilaya][delivery];
+  if (wilaya && prices[wilaya]) {
+    let deliveryPrice = prices[wilaya];
     let total = subtotal + deliveryPrice;
     
     if (subtotal >= freeShippingThreshold) {
       deliveryPrice = 0;
       total = subtotal;
-      deliveryPriceEl.innerHTML = '<span style="text-decoration:line-through">' + prices[wilaya][delivery] + '</span> 0';
+      deliveryPriceEl.innerHTML = '<span style="text-decoration:line-through">' + prices[wilaya] + '</span> 0';
     } else {
       deliveryPriceEl.textContent = deliveryPrice;
     }
@@ -383,6 +458,7 @@ function updatePrices() {
     totalPriceEl.textContent = '--';
   }
 }
+
 
 function changeQuantity(change) {
   let current = parseInt(quantityInput.value);
