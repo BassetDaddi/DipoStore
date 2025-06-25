@@ -146,7 +146,7 @@
           </div>
           <div class="total-price">
             <span>المجموع:</span>
-            <span id="totalPrice"></span>
+            <span id="totalPrice">--</span>
             <span>دج</span>
           </div>
         </div>
@@ -333,10 +333,10 @@
     
     deliveryPriceEl.textContent = "التوصيل مجاني";
     
-    totalPriceEl.textContent = subtotal.toFixed(2);
+    totalPriceEl.textContent = subtotal;
     
     hiddenDeliveryInput.value = deliveryPrice;
-    hiddenTotalInput.value = actualTotal.toFixed(2);
+    hiddenTotalInput.value = actualTotal;
     
   } else {
     deliveryPriceEl.textContent = 'اختر الولاية';
